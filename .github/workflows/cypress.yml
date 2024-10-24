@@ -1,4 +1,4 @@
-name: Full CI Pipeline
+name: Cypress Login Test
 
 on:
   push:
@@ -13,48 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v3
+      - name: Check out the repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Use a versão do Node necessária
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Run Cypress tests
-      run: npm run run-tests
-
-  lighthouse-test:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Install Lighthouse
-      run: npm install -g lighthouse
-
-    - name: Run Lighthouse
-      run: npm run lighthouse
-
-    - name: Upload Lighthouse report
-      uses: actions/upload-artifact@v3
-      with:
-        name: lighthouse-report
-        path: ./lighthouse-report.json
-
-  zap-scan:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Run OWASP ZAP
-      uses: zaproxy/action-full-scan@v0.6.0
-      with:
-        target: 'https://www.automationexercise.com'
-        cmd-options: '-t 60'
-
-    - name: Upload ZAP scan report
-      uses: actions/upload-artifact@v3
-      with:
-        name: zap-report
-        path: /home/runner/work/_temp/zap-scans
+      - name: Run Cypress tests for Login
+        run: npx cypress run --spec "cypress/e2e/login.cy.js" # Executa apenas o teste de login

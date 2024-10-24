@@ -10,11 +10,13 @@ describe('Testes de Login', () => {
         LoginPage.clickSignupButton();
     });
 
+
+
     it('Deve falhar com credenciais inválidas', () => {
         // Preenche os campos de email e senha
         LoginPage.fillEmail('user@example.com');
         LoginPage.fillPassword('wrongpassword');
-        LoginPage.submit();  // Clica no botão de login
+        LoginPage.submit();  // Clica no botão de logi
         // Verifica se a mensagem de erro está correta
         LoginPage.verifyErrorMessage('Credenciais inválidas');
     });
