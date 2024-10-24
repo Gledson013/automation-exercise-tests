@@ -1,0 +1,10 @@
+# Dependências
+node_modules/
+
+# Arquivos de ambiente
+.env
+
+# Logs e relatórios
+cypress/screenshots/
+cypress/videos/
+npm-debug.log*

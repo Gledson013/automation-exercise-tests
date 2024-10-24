@@ -1,0 +1,17 @@
+{
+  "name": "automation-exercise-tests",
+  "version": "1.0.0",
+  "description": "Projeto de automação usando Cypress para testes E2E, API e performance. Inclui histórias de usuário, casos de teste, critérios de aceite e integração com CI/CD.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "GledsonSousa",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.15.0",
+    "cypress-audit": "^1.0.0",
+    "lighthouse": "^2.5.0"
+  }
+}

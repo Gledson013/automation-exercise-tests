@@ -1,0 +1,60 @@
+name: Full CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress tests
+      run: npm run run-tests
+
+  lighthouse-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install Lighthouse
+      run: npm install -g lighthouse
+
+    - name: Run Lighthouse
+      run: npm run lighthouse
+
+    - name: Upload Lighthouse report
+      uses: actions/upload-artifact@v3
+      with:
+        name: lighthouse-report
+        path: ./lighthouse-report.json
+
+  zap-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Run OWASP ZAP
+      uses: zaproxy/action-full-scan@v0.6.0
+      with:
+        target: 'https://www.automationexercise.com'
+        cmd-options: '-t 60'
+
+    - name: Upload ZAP scan report
+      uses: actions/upload-artifact@v3
+      with:
+        name: zap-report
+        path: /home/runner/work/_temp/zap-scans
