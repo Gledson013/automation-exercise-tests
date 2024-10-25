@@ -20,12 +20,18 @@
      ```bash
      npm run run-tests
 
+Para executar os testes de API automatizados com Cypress, utilize o seguinte comando:
+
+```bash
+npx cypress run --spec "cypress/e2e/api_tests.cy.js"
+
+
 ## Requisitos
 - Node.js v16 ou superior
 
 ## Notas sobre Vulnerabilidades em Dependências
 
-Este projeto utiliza ferramentas como **Cypress**, **Lighthouse** e **OWASP ZAP** para realizar testes de desempenho, segurança e E2E. Durante a instalação das dependências, o comando `npm audit` reportou algumas vulnerabilidades em pacotes, como `chrome-launcher`, `lodash.set`, e `minimist`.
+Este projeto utiliza ferramentas como **Cypress**, **Lighthouse** e **OWASP ZAP** para realizar testes E2E e API. Durante a instalação das dependências, o comando `npm audit` reportou algumas vulnerabilidades em pacotes, como `chrome-launcher`, `lodash.set`, e `minimist`.
 
 ### Contexto das Vulnerabilidades:
 

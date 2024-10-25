@@ -5,6 +5,4 @@ export const locatorLogin = {
     signupButton: '[data-qa="signup-button"]',
     verifyLogout: '.shop-menu > .nav > :nth-child(4) > a',
     passwordEmailInvalid: '.login-form > form > p',
-
-
 };
