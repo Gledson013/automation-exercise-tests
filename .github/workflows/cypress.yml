@@ -25,4 +25,4 @@ jobs:
         run: npm ci
 
       - name: Run Cypress tests for Login
-        run: npx cypress run --spec "cypress/e2e/login.cy.js" # Executa apenas o teste de login
+        run: npx cypress run --spec "cypress/e2e/**/*.cy.js" # Executa apenas o teste de login
