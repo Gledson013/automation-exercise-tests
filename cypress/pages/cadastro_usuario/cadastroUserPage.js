@@ -1,4 +1,4 @@
-import { locatorCadastroUsuario } from "./locators";
+import { locatorCadastroUsuario } from "./locatorsCadastro";
 const faker = require('faker-br');
 /// reference types="cypress" />
 

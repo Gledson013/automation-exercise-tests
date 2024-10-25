@@ -1,4 +1,4 @@
-import { locatorLogin } from "./locators";
+import { locatorLogin } from "./locators.Loginjs";
 
 class LoginPage {
     visit() {
