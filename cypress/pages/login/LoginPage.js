@@ -1,29 +1,41 @@
-// cypress/pages/LoginPage.js
+import { locatorLogin } from "./locators";
 
 class LoginPage {
     visit() {
-        cy.visit('/login');  // Navega para a página de login
+        cy.visit('/login');
     }
 
-    fillEmail(email) {
-        cy.get('input[name="email"]').type(email);  // Preenche o email
+    fillEmail() {
+        cy.get(locatorLogin.email).type('userTesteAdm@bom.com.br');
     }
 
-    fillPassword(password) {
-        cy.get('input[name="password"]').type(password);  // Preenche a senha
+    emailInvalid() {
+        cy.get(locatorLogin.email).type('userTesteAdm@bo.com');
     }
 
-    submit() {
-        cy.get('button[type="submit"]').click();  // Clica no botão de login
+    msgIncorrectEmailPassword() {
+        cy.contains('Your email or password is incorrect!').should('be.visible');
+    }
+
+    fillPassword() {
+        cy.get(locatorLogin.password).type("Adm123");
+    }
+
+    loginButton() {
+        cy.get(locatorLogin.submitButton).click();
+    }
+
+    confirmaLoginSuccess() {
+        cy.get(locatorLogin.verifyLogout).should('contain', 'Logout');
     }
 
     verifyErrorMessage(message) {
-        cy.get('.error-message').should('contain', message);  // Verifica a mensagem de erro
+        cy.get('.error-message').should('contain', message);
     }
 
     clickSignupButton() {
-        cy.get('[data-qa="signup-button"]').click();  // Clica no botão de cadastro
+        cy.get('[data-qa="signup-button"]').click();
     }
 }
 
-export default new LoginPage();  // Exporta uma nova instância da página
+export default new LoginPage();

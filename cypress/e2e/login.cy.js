@@ -31,24 +31,18 @@ describe('História de Usuário 2: Login no Sistema', () => {
         LoginPage.visit();  // Visita a página de login
     });
 
-    it.only('Deve permitir o login com e-mail e senha válidos', () => {
-        // Critério de aceite: O sistema deve permitir o login com e-mail e senha válidos.
-        LoginPage.fillEmail('usuario@valido.com');
-        LoginPage.fillPassword('senhaValida123');
-        LoginPage.submit();
-
-        // Verifica se o login foi bem-sucedido e o usuário foi redirecionado corretamente
-        LoginPage.verifyLoginSuccess();
+    it('Deve permitir o login com e-mail e senha válidos', () => {
+        LoginPage.fillEmail();
+        LoginPage.fillPassword();
+        LoginPage.loginButton();
+        LoginPage.confirmaLoginSuccess();
     });
 
     it('Deve bloquear tentativas de login com credenciais inválidas e exibir uma mensagem de erro', () => {
-        // Critério de aceite: O sistema deve bloquear tentativas com credenciais inválidas.
-        LoginPage.fillEmail('usuario@invalido.com');
-        LoginPage.fillPassword('senhaInvalida123');
-        LoginPage.submit();
-
-        // Verifica se a mensagem de erro é exibida corretamente
-        LoginPage.verifyErrorMessage('Credenciais inválidas');
+        LoginPage.emailInvalid();
+        LoginPage.fillPassword();
+        LoginPage.loginButton();
+        LoginPage.msgIncorrectEmailPassword();
     });
 
 });
