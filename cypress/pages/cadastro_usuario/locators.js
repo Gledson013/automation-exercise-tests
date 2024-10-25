@@ -17,7 +17,4 @@ export const locatorCadastroUsuario = {
     zipCode: ('[data-qa="zipcode"]'),
     mobileNumber: ('[data-qa="mobile_number"]'),
     createAccount: ('[data-qa="create-account"]'),
-
-
-
 };
