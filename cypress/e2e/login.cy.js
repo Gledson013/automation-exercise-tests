@@ -22,42 +22,34 @@
 //     });
 // });
 
-import SignupPage from '../pages/signup/SignupPage';
+import LoginPage from '../pages/login/LoginPage';
 
-// Suite de testes: Cadastro de Novo Usuário (História de Usuário 1)
-describe('História de Usuário 1: Cadastro de Novo Usuário', () => {
+describe('História de Usuário 2: Login no Sistema', () => {
 
     // Executa antes de cada teste
     beforeEach(() => {
-        LoginPage.visit();  // Visita a página de cadastro
+        LoginPage.visit();  // Visita a página de login
     });
 
-    // Caso de teste 1: Exibir formulário de cadastro com os campos obrigatórios
-    it('Deve exibir o formulário de cadastro com os campos: nome, e-mail e senha', () => {
-        // Critério de aceite: O sistema deve exibir um formulário de cadastro com os campos nome, e-mail e senha.
-        SignupPage.verifyFormFields(['Nome', 'E-mail', 'Senha']);  // Verifica os campos obrigatórios
+    it.only('Deve permitir o login com e-mail e senha válidos', () => {
+        // Critério de aceite: O sistema deve permitir o login com e-mail e senha válidos.
+        LoginPage.fillEmail('usuario@valido.com');
+        LoginPage.fillPassword('senhaValida123');
+        LoginPage.submit();
+
+        // Verifica se o login foi bem-sucedido e o usuário foi redirecionado corretamente
+        LoginPage.verifyLoginSuccess();
     });
 
-    // Caso de teste 2: Cadastrar usuário com e-mail válido
-    it('Deve permitir o cadastro de um novo usuário com um e-mail válido', () => {
-        // Critério de aceite: Deve ser possível cadastrar apenas usuários com um e-mail válido.
-        SignupPage.fillName('Novo Usuário');
-        SignupPage.fillEmail('usuario@exemplo.com');
-        SignupPage.fillPassword('senha123');
-        SignupPage.submit();
+    it('Deve bloquear tentativas de login com credenciais inválidas e exibir uma mensagem de erro', () => {
+        // Critério de aceite: O sistema deve bloquear tentativas com credenciais inválidas.
+        LoginPage.fillEmail('usuario@invalido.com');
+        LoginPage.fillPassword('senhaInvalida123');
+        LoginPage.submit();
 
-        // Verifica se o usuário foi redirecionado para a página de confirmação
-        SignupPage.verifyRedirectionToConfirmation();
+        // Verifica se a mensagem de erro é exibida corretamente
+        LoginPage.verifyErrorMessage('Credenciais inválidas');
     });
 
-    // Caso de teste 3: Bloquear cadastro com e-mail inválido
-    it('Deve bloquear o cadastro se o e-mail for inválido', () => {
-        SignupPage.fillName('Novo Usuário');
-        SignupPage.fillEmail('emailinvalido');  // E-mail inválido
-        SignupPage.fillPassword('senha123');
-        SignupPage.submit();
-
-        // Verifica se o sistema exibe uma mensagem de erro para o e-mail inválido
-        SignupPage.verifyErrorMessage('Insira um e-mail válido');
-    });
 });
+
