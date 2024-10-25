@@ -23,19 +23,9 @@ class cadastroPage {
     cy.get(locatorCadastroUsuario.email).type('emailinvalido');
   }
 
-  // verifyErrorMsgEmail() {
-  //   cy.get(locatorCadastroUsuario.email)
-  //     .then($input => {
-  //       const validationMessage = $input[0].validationMessage.trim();
-  //       expect(validationMessage).to.include('Inclua um "@" no endereço de e-mail.');
-  //     });
-  // }
-
   verifyErrorMsgEmail() {
     cy.get(locatorCadastroUsuario.email).then(($input) => {
       const validationMessage = $input[0].validationMessage;
-
-      // Verifica se a mensagem é em português ou inglês
       if (validationMessage.includes('Inclua um "@" no endereço de e-mail.')) {
         expect(validationMessage).to.include('Inclua um "@" no endereço de e-mail.');
       } else if (validationMessage.includes('Please')) {
@@ -45,7 +35,6 @@ class cadastroPage {
       }
     });
   }
-
 
   submit() {
     cy.get(locatorCadastroUsuario.signupButton).click();
